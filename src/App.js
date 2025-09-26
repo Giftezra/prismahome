@@ -23,6 +23,7 @@ import detailingVan from "./detailingvan.jpg";
 import interiorCleaning from "./interior cleaning.jpg";
 import tireCleaning from "./tire cleaning.jpg";
 import cleaning from "./cleaning.jpg";
+import dailyRefresh from "./daily refresh.webp";
 
 // Styled Components
 const Container = styled.div`
@@ -360,8 +361,8 @@ const PackageBadge = styled.span`
 
 const PackageImage = styled.div`
   width: 100%;
-  height: 200px;
-  border-radius: 8px;
+  height: 300px;
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 1.5rem;
 
@@ -527,7 +528,7 @@ const MobileContent = styled.div`
 
 const MobileImage = styled.div`
   width: 100%;
-  height: 300px;
+  height: 400px;
   border-radius: 12px;
   overflow: hidden;
 
@@ -548,18 +549,6 @@ const VideoSection = styled.section`
 const VideoContent = styled.div`
   max-width: 600px;
   margin: 0 auto;
-`;
-
-const VideoTitle = styled.h2`
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-`;
-
-const VideoSubtitle = styled.p`
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
 `;
 
 const PlayButton = styled(motion.button)`
@@ -884,30 +873,6 @@ const SliderControl = styled.div`
   z-index: 10;
 `;
 
-// Awards Section
-const AwardsSection = styled.section`
-  padding: 4rem 0;
-  background: white;
-`;
-
-const AwardsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-`;
-
-const AwardBadge = styled.div`
-  background: ${(props) => props.color || "#4caf50"};
-  color: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  line-height: 1.4;
-`;
-
 // FAQ Section
 const FAQSection = styled.section`
   padding: 4rem 0;
@@ -951,54 +916,7 @@ const FAQAnswer = styled.div`
   padding: 0 1.5rem 1.5rem;
   color: #ccc;
   line-height: 1.6;
-`;
-
-// Locations Section
-const LocationsSection = styled.section`
-  padding: 4rem 0;
-  background: #1a1a1a;
-  color: white;
-`;
-
-const LocationsGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-`;
-
-const LocationsColumn = styled.div`
-  h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-`;
-
-const LocationItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.8rem;
-  color: #ccc;
-`;
-
-const QuickLink = styled.a`
-  color: #ccc;
-  text-decoration: none;
-  margin-bottom: 0.8rem;
-  display: block;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: white;
-  }
+  font-size: 0.8rem;
 `;
 
 const Footer = styled.footer`
@@ -1024,7 +942,7 @@ function App() {
     {
       question: "How do I book a service?",
       answer:
-        "You can book a service through our mobile app or by calling our customer service team. Simply select your preferred time and location, and we'll take care of the rest.",
+        "Services can only be booked through our mobile app which is available on the App Store and Google Play. We do not currently accept bookings over the phone.",
     },
     {
       question: "Can you detail my car at my home, office or apartment?",
@@ -1034,70 +952,86 @@ function App() {
     {
       question: "How long does the detail usually take?",
       answer:
-        "Service times vary depending on the package selected. Our Full Detail typically takes 2-3 hours, while our Quick Refresh takes about 1 hour.",
+        "Service times vary depending on the package selected. Our Full Detail typically takes 2-3 hours, while our Quick Refres takes about 1 hour and, is designed for professionals who want to keep their cars looking brand new.",
     },
     {
       question: "How long will the detail last?",
       answer:
-        "Our detailing services typically last 2-4 weeks depending on weather conditions and how often you drive. We use premium products to ensure long-lasting results.",
+        "Our detailing services typically last 2-4 weeks depending on weather conditions and how often you drive. We use premium products to ensure long-lasting results. However, we recommend you book the Quick Sparkle every 2 weeks to keep your car looking brand new.",
     },
     {
       question: "What if I don't have access to water or electricity?",
       answer:
         "No problem! Our mobile units are fully self-contained with water tanks and generators, so we can provide service anywhere.",
     },
+    {
+      question: "What if I no longer need the service?",
+      answer:
+        "You can cancel your service at any time through our mobile app. Please note that cancellations made within 12 hours of the service will not be refunded. also note that once a service is in progress, it cannot be cancelled.",
+    },
+    {
+      question: "What if I want to reschedule the service?",
+      answer:
+        "We currently do not offer reschedules. over the app. if you choose to reschedule, you will have to cancel the service and book a new one. if your service is within 12 hours and you would like to reschedule, plese contact us at +353 899 765 197 or email us at support@prismavalet.com with your booking reference number.",
+    },
+    {
+      question: "Can i choose a detailer who would do the service?",
+      answer:
+        "No! you can not select a specific detailer to render the service. our system is designed to allocate services to the best available detailer, based on their location, availability and ratings from previous services. This ensures that you receive the best possible service.",
+    },
+    {
+      question: "Where are you located?",
+      answer:
+        "We are currently located in Dublin, Ireland. We will be expanding to other locations in the near future.",
+    },
+    {
+      question: "What if I have more questions?",
+      answer:
+        "Please feel free to contact us at +353 899 765 197 or email us at support@prismavalet.com.",
+    },
   ];
 
   const packages = {
     basic: {
-      title: "Basic Detail",
+      title: "The Quick Sparkle",
       description:
         "Essential cleaning for routine maintenance. Perfect for regular upkeep.",
       image: cleaning,
-      interior: [
-        "Interior Vacuum",
-        "Wipe Down Surfaces",
-        "Clean Windows & Mirrors",
-        "Basic Floor Mat Cleaning",
-      ],
+      interior: [],
       exterior: [
-        "Hand Wash & Dry",
-        "Clean Wheels & Tires",
-        "Basic Wax Application",
-        "Window Cleaning",
+        "Exterior Wash and Dry (NoH20, Hand Wash, Steam wash)",
+        "Clean Wheels, Tires, and  Arches",
+        "Exterior Windows Cleaned",
       ],
       duration: "45-60 minutes",
-      price: "€40-55",
+      price: "€35",
     },
     mini: {
-      title: "Mini Detail",
+      title: "The Daily Refresh",
       description:
         "Enhanced cleaning with protective treatments. Great for monthly maintenance.",
       image: tireCleaning,
       interior: [
         "Full Interior Vacuum",
-        "Surface Disinfection",
-        "UV Protection Application",
         "Interior Glass Cleaning",
         "Dashboard & Console Wipe",
       ],
       exterior: [
-        "Hand Wash with Foam Bath",
-        "Wheel & Tire Dressing",
-        "Spray Wax Application",
-        "Exterior Glass Cleaning",
-        "Tire Shine Application",
+        "Exterior Wash and Dry (NoH20, Hand Wash, Steam wash)",
+        "Clean Wheels, Tires, and  Arches",
+        "Exterior Windows Cleaned",
+        "Door sills and Lamps Cleaned",
       ],
-      duration: "60-90 minutes",
-      price: "€65-80",
+      duration: "1 hour-1.5 hours",
+      price: "€70",
     },
     interior: {
-      title: "Interior Detail",
+      title: "Interior Sanctuary",
       description:
         "Deep interior cleaning and restoration. Perfect for addressing stains and odors.",
       image: interiorCleaning,
       interior: [
-        "Deep Carpet Shampooing",
+        "Deep Carpet & Upholstery Cleaning",
         "Upholstery Steam Cleaning",
         "Leather Cleaning & Conditioning",
         "Dashboard Deep Clean",
@@ -1105,12 +1039,12 @@ function App() {
         "Interior Protection Application",
         "Trunk & Door Jambs Detail",
       ],
-      exterior: ["Basic Exterior Wash", "Window Cleaning"],
+      exterior: [""],
       duration: "2-3 hours",
-      price: "€100-135",
+      price: "€120",
     },
     full: {
-      title: "Full Detail",
+      title: "The Showroom Shine",
       badge: "Most Popular",
       description:
         "Comprehensive inside-out detailing. Complete vehicle restoration.",
@@ -1127,17 +1061,17 @@ function App() {
       exterior: [
         "Hand Wash & Clay Bar Treatment",
         "Paint Polishing",
-        "Long-term Wax/Sealant Application",
         "Wheel & Tire Deep Clean",
         "Tire Dressing",
         "Exterior Glass Polish",
         "Trim & Plastic Restoration",
+        "Tar and Gravel Removal",
       ],
       duration: "3-4 hours",
-      price: "€150-210",
+      price: "€180",
     },
     premium: {
-      title: "Premium Detail",
+      title: "The Ultimate Prestige",
       badge: "VIP",
       description:
         "Ultimate detailing experience with advanced treatments and protection.",
@@ -1152,16 +1086,17 @@ function App() {
         "Interior Detailing & Protection",
       ],
       exterior: [
-        "Multi-stage Paint Correction",
-        "Ceramic Coating Application",
-        "Headlight Restoration",
+        "Single Stage Paint Correction",
+        "Clay Bar Treatment",
+        "Application of Wax/Sealant",
         "Engine Bay Cleaning & Dressing",
-        "Paint Protection Film Prep",
-        "Premium Wax/Sealant",
         "Complete Exterior Protection",
+        "Tar and Gravel Removal",
+        "Exterior Glass Polish",
+        "Trim & Plastic Restoration",
       ],
-      duration: "5-7 hours",
-      price: "€295-420",
+      duration: "6-7 hours",
+      price: "€500",
     },
   };
 
@@ -1181,7 +1116,7 @@ function App() {
             >
               <HeroTitle>We Make It Shine</HeroTitle>
               <HeroSubtitle>
-                Get Service At Home or At Our Shop
+                Get Your Services Delivered To You Anywhere At Your Convenience
                 <FaHeart style={{ color: "#ff6b35", marginLeft: "0.5rem" }} />
               </HeroSubtitle>
             </motion.div>
@@ -1190,8 +1125,8 @@ function App() {
               <motion.img
                 src={carPolishing}
                 alt="Professional Car Detailing"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 2, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               />
             </HeroImage>
@@ -1329,31 +1264,31 @@ function App() {
               active={activePackage === "basic"}
               onClick={() => setActivePackage("basic")}
             >
-              Basic
+              The Quick Sparkle
             </TabButton>
             <TabButton
               active={activePackage === "mini"}
               onClick={() => setActivePackage("mini")}
             >
-              Mini
+              The Daily Refresh
             </TabButton>
             <TabButton
               active={activePackage === "interior"}
               onClick={() => setActivePackage("interior")}
             >
-              Interior
+              Interior Sanctuary
             </TabButton>
             <TabButton
               active={activePackage === "full"}
               onClick={() => setActivePackage("full")}
             >
-              Full
+              The Showroom Shine
             </TabButton>
             <TabButton
               active={activePackage === "premium"}
               onClick={() => setActivePackage("premium")}
             >
-              Premium
+              The Ultimate Prestige
             </TabButton>
           </PackageTabs>
 
@@ -1373,6 +1308,7 @@ function App() {
               <img
                 src={packages[activePackage].image}
                 alt={packages[activePackage].title}
+                initial={{ opacity: 0, scale: 1 }}
               />
             </PackageImage>
 
@@ -1407,14 +1343,6 @@ function App() {
                 </ServiceItem>
               ))}
             </ServiceList>
-
-            <DownloadCTA
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FaDownload />
-              Download
-            </DownloadCTA>
           </PackageCard>
         </Container>
       </PackagesSection>
@@ -1466,7 +1394,7 @@ function App() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                We bring the car detailing to your home or office
+                Offering you convenience and flexibility
               </motion.p>
             </MobileContent>
             <MobileImage>
@@ -1542,7 +1470,7 @@ function App() {
             >
               <LicensedTitle>Licensed And Insured</LicensedTitle>
               <LicensedText>
-                With over 10 years in the business, PrismaValet has fine-tuned
+                With over 3 years in the business, PrismaValet has fine-tuned
                 the most Convenient and Trusted detailing experience. We take
                 care of every detail, so you don't have to. Whether at your
                 place or our shop, we're ready to make your car, boat, or RV
@@ -1601,15 +1529,6 @@ function App() {
               </GiftOption>
             </GiftOptions>
 
-            <CustomAmountSection>
-              <AmountInput
-                type="text"
-                value={customAmount}
-                onChange={(e) => setCustomAmount(e.target.value)}
-                placeholder="$ 0.00"
-              />
-              <BuyButton>Buy</BuyButton>
-            </CustomAmountSection>
           </GiftContent>
         </Container>
       </GiftSection>
@@ -1624,12 +1543,9 @@ function App() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <MobileIcon>
-                <FaMobile />
-              </MobileIcon>
               <MobileTitle>Mobile Auto Detailing</MobileTitle>
               <MobileSubtitle>
-                We bring the car detailing to your home or office
+                We bring you convenience and flexibility
               </MobileSubtitle>
             </motion.div>
 
@@ -1640,63 +1556,17 @@ function App() {
               viewport={{ once: true }}
             >
               <MobileIcon>
-                <FaPhone />
+                <FaDownload />
               </MobileIcon>
-              <MobileTitle>Get help scheduling</MobileTitle>
-              <MobileSubtitle>Have any questions? Call for help</MobileSubtitle>
-              <PhoneNumber href="tel:503-730-0014">503-730-0014</PhoneNumber>
+              <MobileTitle>Download the app to get started</MobileTitle>
+              <MobileSubtitle>Have any questions? Email for help</MobileSubtitle>
+              <PhoneNumber href="mailto:support@prismavalet.com">
+                support@prismavalet.com
+              </PhoneNumber>
             </motion.div>
-
-            <BeforeAfterSlider>
-              <BeforeAfterImage src={interiorCleaning} />
-              <BeforeAfterOverlay>Before</BeforeAfterOverlay>
-              <SliderControl>
-                <FaChevronDown style={{ transform: "rotate(90deg)" }} />
-              </SliderControl>
-            </BeforeAfterSlider>
           </MobileSchedulingContent>
         </Container>
       </MobileSchedulingSection>
-
-      {/* Awards Section */}
-      <AwardsSection>
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <AwardsGrid>
-              <AwardBadge color="#4caf50">
-                2018 Angie's list
-                <br />
-                SUPER SERVICE AWARD
-              </AwardBadge>
-              <AwardBadge color="#2196f3">
-                BBB
-                <br />
-                ACCREDITED BUSINESS
-              </AwardBadge>
-              <AwardBadge color="#4caf50">
-                2024 Neighborhood
-                <br />
-                FAVES nextdoor
-              </AwardBadge>
-              <AwardBadge color="#ff9800">
-                SATISFACTION
-                <br />
-                100% GUARANTEED
-              </AwardBadge>
-              <AwardBadge color="#f44336">
-                PEOPLE LOVE US
-                <br />
-                on yelp
-              </AwardBadge>
-            </AwardsGrid>
-          </motion.div>
-        </Container>
-      </AwardsSection>
 
       {/* Video Section */}
       <VideoSection>
@@ -1782,50 +1652,6 @@ function App() {
           </FAQContent>
         </Container>
       </FAQSection>
-
-      {/* Locations Section */}
-      <LocationsSection>
-        <Container>
-          <LocationsGrid>
-            <LocationsColumn>
-              <h3>LOCATIONS SERVED</h3>
-              {[
-                "SW Portland, OR",
-                "NW Portland, OR",
-                "Beaverton, OR",
-                "Lake Oswego, OR",
-                "Hillsboro, OR",
-                "Bethany, OR",
-                "Tigard, OR",
-                "Vancouver, WA",
-                "Salem, OR",
-              ].map((location, index) => (
-                <LocationItem key={index}>
-                  <span>♦</span>
-                  {location}
-                </LocationItem>
-              ))}
-            </LocationsColumn>
-            <LocationsColumn>
-              <h3>QUICK LINKS</h3>
-              {[
-                "Car Detailing Training",
-                "Home Page",
-                "Gift Certificates",
-                "Our Gallery",
-                "Pricing",
-                "Careers",
-                "FAQ",
-              ].map((link, index) => (
-                <QuickLink key={index} href="#">
-                  {link}
-                </QuickLink>
-              ))}
-            </LocationsColumn>
-          </LocationsGrid>
-        </Container>
-      </LocationsSection>
-
       {/* Footer */}
       <Footer>
         <Container>

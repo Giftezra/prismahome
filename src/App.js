@@ -12,7 +12,6 @@ import {
   FaChevronDown,
   FaPlay,
   FaHeart,
-  FaPhone,
 } from "react-icons/fa";
 import "./App.css";
 
@@ -23,7 +22,6 @@ import detailingVan from "./detailingvan.jpg";
 import interiorCleaning from "./interior cleaning.jpg";
 import tireCleaning from "./tire cleaning.jpg";
 import cleaning from "./cleaning.jpg";
-import dailyRefresh from "./daily refresh.webp";
 
 // Styled Components
 const Container = styled.div`
@@ -423,26 +421,6 @@ const ServiceItem = styled.div`
   margin-bottom: 0.5rem;
   color: #333;
   font-size: 0.95rem;
-`;
-
-const DownloadCTA = styled(motion.button)`
-  background: #2196f3;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  &:hover {
-    background: #1976d2;
-  }
 `;
 
 // Reviews Section
@@ -1528,7 +1506,6 @@ function App() {
                 <FaChevronDown />
               </GiftOption>
             </GiftOptions>
-
           </GiftContent>
         </Container>
       </GiftSection>
@@ -1559,7 +1536,9 @@ function App() {
                 <FaDownload />
               </MobileIcon>
               <MobileTitle>Download the app to get started</MobileTitle>
-              <MobileSubtitle>Have any questions? Email for help</MobileSubtitle>
+              <MobileSubtitle>
+                Have any questions? Email for help
+              </MobileSubtitle>
               <PhoneNumber href="mailto:support@prismavalet.com">
                 support@prismavalet.com
               </PhoneNumber>

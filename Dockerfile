@@ -1,26 +1,18 @@
-# Use Node.js 18 Alpine as base image
-FROM node:18-alpine
+# Multi-stage build for smaller production image
+FROM node:18-alpine AS builder
 
-# Set working directory
 WORKDIR /app
-
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies
-RUN npm ci --only=production
-
-# Copy source code
+RUN npm ci --silent
 COPY . .
-
-# Build the React app
 RUN npm run build
 
-# Install serve to run the production build
-RUN npm install -g serve
+# Production stage - much smaller
+FROM node:18-alpine AS production
 
-# Expose port 3000
+WORKDIR /app
+RUN npm install -g serve --silent
+COPY --from=builder /app/build ./build
+
 EXPOSE 3000
-
-# Start the application
 CMD ["serve", "-s", "build", "-l", "3000"]

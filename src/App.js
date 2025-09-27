@@ -723,38 +723,6 @@ const GiftOption = styled.div`
   }
 `;
 
-const CustomAmountSection = styled.div`
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  max-width: 400px;
-  margin: 2rem auto;
-`;
-
-const AmountInput = styled.input`
-  flex: 1;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  text-align: center;
-`;
-
-const BuyButton = styled.button`
-  background: #1a1a1a;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-
-  &:hover {
-    background: #333;
-  }
-`;
-
 // Mobile Scheduling Section
 const MobileSchedulingSection = styled.section`
   padding: 4rem 0;
@@ -797,58 +765,6 @@ const PhoneNumber = styled.a`
   &:hover {
     text-decoration: underline;
   }
-`;
-
-const BeforeAfterSlider = styled.div`
-  width: 100%;
-  height: 300px;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  margin-top: 2rem;
-`;
-
-const BeforeAfterImage = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(${(props) => props.src});
-  background-size: cover;
-  background-position: center;
-`;
-
-const BeforeAfterOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  font-size: 1.2rem;
-`;
-
-const SliderControl = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  background: white;
-  border: 2px solid #1a1a1a;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
 `;
 
 // FAQ Section
@@ -907,7 +823,6 @@ const Footer = styled.footer`
 function App() {
   const [activePackage, setActivePackage] = useState("basic");
   const [selectedCar, setSelectedCar] = useState(0);
-  const [customAmount, setCustomAmount] = useState("$ 0.00");
   const [expandedFAQ, setExpandedFAQ] = useState(null);
 
   const carImages = [

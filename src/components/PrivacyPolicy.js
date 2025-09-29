@@ -144,6 +144,8 @@ const PrivacyPolicy = () => {
           ? "https://detailer.prismavalet.com/api/v1/terms/get_privacy_policy/"
           : "https://client.prismavalet.com/api/v1/terms/get_privacy_policy/";
 
+      console.log("Fetching privacy policy from:", apiUrl);
+
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -151,11 +153,15 @@ const PrivacyPolicy = () => {
         },
       });
 
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
+      console.log("API Response:", data);
 
       if (data.content) {
         setPrivacyContent(data.content);

@@ -2,8 +2,6 @@ name: Deploy Prismahome App
 
 on:
   push:
-    branches: [master, develop, staging]
-  pull_request:
     branches: [master]
 
 jobs:

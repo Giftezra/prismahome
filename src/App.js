@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import {
@@ -14,6 +14,10 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import "./App.css";
+
+// Import components
+import PaymentReturn from "./components/PaymentReturn";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 // Import local images
 import heroImage from "./nice car.jpg";
@@ -821,9 +825,33 @@ const Footer = styled.footer`
 `;
 
 function App() {
+  const [currentRoute, setCurrentRoute] = useState("home");
   const [activePackage, setActivePackage] = useState("basic");
   const [selectedCar, setSelectedCar] = useState(0);
   const [expandedFAQ, setExpandedFAQ] = useState(null);
+
+  useEffect(() => {
+    // Simple routing based on URL path
+    const path = window.location.pathname;
+    const search = window.location.search;
+
+    if (path === "/payment/return" || search.includes("payment_intent")) {
+      setCurrentRoute("payment-return");
+    } else if (path === "/privacy-policy") {
+      setCurrentRoute("privacy-policy");
+    } else {
+      setCurrentRoute("home");
+    }
+  }, []);
+
+  // Route rendering
+  if (currentRoute === "payment-return") {
+    return <PaymentReturn />;
+  }
+
+  if (currentRoute === "privacy-policy") {
+    return <PrivacyPolicy />;
+  }
 
   const carImages = [
     { src: heroImage, name: "Porsche" },

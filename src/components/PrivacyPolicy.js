@@ -122,13 +122,11 @@ const PrivacyPolicy = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [privacyContent, setPrivacyContent] = useState("");
-  const [appType, setAppType] = useState("client");
 
   useEffect(() => {
     // Get app type from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const type = urlParams.get("app") || "client";
-    setAppType(type);
 
     // Fetch privacy policy content
     fetchPrivacyPolicy(type);

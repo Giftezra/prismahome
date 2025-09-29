@@ -79,16 +79,49 @@ const ErrorMessage = styled.div`
   font-size: 1.1rem;
 `;
 
-const ContentFrame = styled.iframe`
-  width: 100%;
-  min-height: 600px;
-  border: none;
-  border-radius: 8px;
+const PrivacyContent = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+    text-align: center;
+  }
+
+  p {
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  strong {
+    font-weight: 600;
+    color: #000;
+  }
+
+  ul,
+  ol {
+    margin-left: 20px;
+    margin-bottom: 16px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  a {
+    color: #8b5cf6;
+    text-decoration: underline;
+  }
 `;
 
 const PrivacyPolicy = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [privacyContent, setPrivacyContent] = useState("");
   const [appType, setAppType] = useState("client");
 
   useEffect(() => {
@@ -96,28 +129,49 @@ const PrivacyPolicy = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const type = urlParams.get("app") || "client";
     setAppType(type);
-    setLoading(false);
+
+    // Fetch privacy policy content
+    fetchPrivacyPolicy(type);
   }, []);
+
+  const fetchPrivacyPolicy = async (type) => {
+    try {
+      setLoading(true);
+      setError(false);
+
+      const apiUrl =
+        type === "detailer"
+          ? "https://detailer.prismavalet.com/api/v1/terms/get_privacy_policy/"
+          : "https://client.prismavalet.com/api/v1/terms/get_privacy_policy/";
+
+      const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.content) {
+        setPrivacyContent(data.content);
+      } else {
+        throw new Error("No content received");
+      }
+    } catch (err) {
+      console.error("Error fetching privacy policy:", err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleBack = () => {
     window.history.back();
-  };
-
-  const getPrivacyPolicyUrl = () => {
-    // Use the correct subdomains for each app
-    if (appType === "detailer") {
-      return "https://detailer.prismavalet.com/api/v1/terms/get_privacy_policy/";
-    }
-    return "https://client.prismavalet.com/api/v1/terms/get_privacy_policy/";
-  };
-
-  const handleFrameLoad = () => {
-    setLoading(false);
-  };
-
-  const handleFrameError = () => {
-    setLoading(false);
-    setError(true);
   };
 
   if (loading) {
@@ -199,11 +253,8 @@ const PrivacyPolicy = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <ContentFrame
-            src={getPrivacyPolicyUrl()}
-            onLoad={handleFrameLoad}
-            onError={handleFrameError}
-            title="Privacy Policy"
+          <PrivacyContent
+            dangerouslySetInnerHTML={{ __html: privacyContent }}
           />
         </Card>
       </ContentContainer>

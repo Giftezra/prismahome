@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { FaArrowLeft, FaSpinner } from "react-icons/fa";
+import { FaArrowLeft, FaSpinner, FaCookie } from "react-icons/fa";
+import CookieSettings from "./CookieSettings";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -22,7 +23,38 @@ const HeaderContent = styled.div`
   padding: 0 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
+`;
+
+const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const CookieSettingsButton = styled(motion.button)`
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: #7c3aed;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const BackButton = styled(motion.button)`
@@ -122,6 +154,7 @@ const PrivacyPolicy = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [privacyContent, setPrivacyContent] = useState("");
+  const [showCookieSettings, setShowCookieSettings] = useState(false);
 
   useEffect(() => {
     // Get app type from URL parameters
@@ -176,6 +209,10 @@ const PrivacyPolicy = () => {
 
   const handleBack = () => {
     window.history.back();
+  };
+
+  const openCookieSettings = () => {
+    setShowCookieSettings(true);
   };
 
   if (loading) {
@@ -241,14 +278,26 @@ const PrivacyPolicy = () => {
     <Container>
       <Header>
         <HeaderContent>
-          <BackButton
-            onClick={handleBack}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FaArrowLeft />
-          </BackButton>
-          <Title>Privacy Policy</Title>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <BackButton
+              onClick={handleBack}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaArrowLeft />
+            </BackButton>
+            <Title>Privacy Policy</Title>
+          </div>
+          <HeaderActions>
+            <CookieSettingsButton
+              onClick={openCookieSettings}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaCookie />
+              Cookie Settings
+            </CookieSettingsButton>
+          </HeaderActions>
         </HeaderContent>
       </Header>
       <ContentContainer>
@@ -262,6 +311,12 @@ const PrivacyPolicy = () => {
           />
         </Card>
       </ContentContainer>
+
+      {/* Cookie Settings Modal */}
+      <CookieSettings
+        isOpen={showCookieSettings}
+        onClose={() => setShowCookieSettings(false)}
+      />
     </Container>
   );
 };

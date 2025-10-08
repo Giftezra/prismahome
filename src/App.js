@@ -18,6 +18,8 @@ import "./App.css";
 // Import components
 import PaymentReturn from "./components/PaymentReturn";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import CookieConsent from "./components/CookieConsent";
+import CookieDemo from "./components/CookieDemo";
 
 // Import local images
 import heroImage from "./nice car.jpg";
@@ -839,6 +841,8 @@ function App() {
       setCurrentRoute("payment-return");
     } else if (path === "/privacy-policy") {
       setCurrentRoute("privacy-policy");
+    } else if (path === "/cookie-demo") {
+      setCurrentRoute("cookie-demo");
     } else {
       setCurrentRoute("home");
     }
@@ -851,6 +855,10 @@ function App() {
 
   if (currentRoute === "privacy-policy") {
     return <PrivacyPolicy />;
+  }
+
+  if (currentRoute === "cookie-demo") {
+    return <CookieDemo />;
   }
 
   const carImages = [
@@ -1577,9 +1585,38 @@ function App() {
       {/* Footer */}
       <Footer>
         <Container>
-          <p>&copy; 2025 PrismaValet. All rights reserved.</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "1rem",
+            }}
+          >
+            <p style={{ margin: 0 }}>
+              &copy; 2025 PrismaValet. All rights reserved.
+            </p>
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <a
+                href="/privacy-policy"
+                style={{ color: "#8b5cf6", textDecoration: "underline" }}
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/cookie-demo"
+                style={{ color: "#8b5cf6", textDecoration: "underline" }}
+              >
+                Cookie Demo
+              </a>
+            </div>
+          </div>
         </Container>
       </Footer>
+
+      {/* Cookie Consent Banner */}
+      <CookieConsent />
     </div>
   );
 }

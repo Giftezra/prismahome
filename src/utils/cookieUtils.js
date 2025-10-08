@@ -177,7 +177,6 @@ export const initializeMarketing = (marketingInitFunction) => {
  * Clear all cookies except essential ones
  */
 export const clearNonEssentialCookies = () => {
-  const preferences = getCookiePreferences();
   const allCookies = document.cookie.split(";");
 
   allCookies.forEach((cookie) => {

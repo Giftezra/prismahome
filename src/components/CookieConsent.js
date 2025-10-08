@@ -369,7 +369,21 @@ const CookieConsent = () => {
                   personalized content, and analyze our traffic. By clicking
                   "Accept All", you consent to our use of cookies. You can
                   manage your preferences by clicking{" "}
-                  <a onClick={openSettings}>Cookie Settings</a>.
+                  <button
+                    onClick={openSettings}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#8b5cf6",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                      padding: 0,
+                      font: "inherit",
+                    }}
+                  >
+                    Cookie Settings
+                  </button>
+                  .
                 </p>
               </CookieInfo>
               <CookieActions>

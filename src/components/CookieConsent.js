@@ -1,118 +1,141 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCookie, FaTimes, FaCog } from "react-icons/fa";
 
-const CookieBanner = styled(motion.div)`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  border-top: 1px solid #e0e0e0;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 1.5rem;
-`;
+// Custom Cookie Icon Component
+const CookieIcon = styled.div`
+  width: 80px;
+  height: 80px;
+  background: #e5e7eb;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto 1rem auto;
 
-const CookieContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: #d1d5db;
+    border-radius: 50%;
+  }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #9ca3af;
+    border-radius: 50%;
+    box-shadow: 8px 8px 0 #6b7280, -8px 8px 0 #6b7280, 8px -8px 0 #6b7280,
+      -8px -8px 0 #6b7280, 0 15px 0 #6b7280, 0 -15px 0 #6b7280, 15px 0 0 #6b7280,
+      -15px 0 0 #6b7280;
   }
 `;
 
-const CookieInfo = styled.div`
-  flex: 1;
-  min-width: 300px;
+const CookieModal = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+`;
 
-  h3 {
+const ModalContent = styled(motion.div)`
+  background: #2d3748;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+`;
+
+const ModalHeader = styled.div`
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
     margin: 0 0 0.5rem 0;
-    color: #1a1a1a;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 
   p {
     margin: 0;
-    color: #666;
-    font-size: 0.95rem;
+    color: #cbd5e0;
+    font-size: 0.9rem;
     line-height: 1.4;
-  }
-
-  a {
-    color: #8b5cf6;
-    text-decoration: underline;
-    cursor: pointer;
-
-    &:hover {
-      color: #7c3aed;
-    }
   }
 `;
 
 const CookieActions = styled.div`
   display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-
-  @media (max-width: 768px) {
-    width: 100%;
-    justify-content: center;
-  }
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
 `;
 
-const CookieButton = styled(motion.button)`
-  padding: 0.75rem 1.5rem;
+const AcceptButton = styled(motion.button)`
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: #f7fafc;
+  color: #2d3748;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   transition: all 0.2s ease;
+  font-size: 0.95rem;
 
-  &.primary {
-    background: #8b5cf6;
+  &:hover {
+    background: #edf2f7;
+  }
+`;
+
+const DeclineButton = styled(motion.button)`
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #cbd5e0;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+
+  &:hover {
     color: white;
-
-    &:hover {
-      background: #7c3aed;
-    }
   }
+`;
 
-  &.secondary {
-    background: #f3f4f6;
-    color: #374151;
-    border: 1px solid #d1d5db;
+const SettingsLink = styled.button`
+  background: none;
+  border: none;
+  color: #63b3ed;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 
-    &:hover {
-      background: #e5e7eb;
-    }
-  }
-
-  &.outline {
-    background: transparent;
-    color: #8b5cf6;
-    border: 1px solid #8b5cf6;
-
-    &:hover {
-      background: #8b5cf6;
-      color: white;
-    }
+  &:hover {
+    color: #90cdf4;
   }
 `;
 
@@ -130,7 +153,7 @@ const SettingsModal = styled(motion.div)`
   padding: 2rem;
 `;
 
-const ModalContent = styled(motion.div)`
+const SettingsModalContent = styled(motion.div)`
   background: white;
   border-radius: 12px;
   max-width: 600px;
@@ -139,81 +162,87 @@ const ModalContent = styled(motion.div)`
   overflow-y: auto;
 `;
 
-const ModalHeader = styled.div`
-  padding: 2rem 2rem 1rem 2rem;
-  border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+const SettingsModalHeader = styled.div`
+  padding: 2rem 2rem 1.5rem 2rem;
+  border-bottom: 1px solid #f3f4f6;
 
   h2 {
-    margin: 0;
-    color: #1a1a1a;
+    margin: 0 0 0.5rem 0;
+    color: #1f2937;
     font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-weight: 600;
   }
 
-  button {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
+  p {
+    margin: 0;
     color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .learn-more {
+    color: #10b981;
+    text-decoration: none;
+    font-weight: 500;
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     &:hover {
-      background: #f3f4f6;
-      color: #374151;
+      color: #059669;
     }
   }
 `;
 
-const ModalBody = styled.div`
+const SettingsModalBody = styled.div`
   padding: 2rem;
 `;
 
 const CookieCategory = styled.div`
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  background: #fafafa;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .category-info {
+    flex: 1;
+    margin-right: 1rem;
+  }
 
   h3 {
-    margin: 0 0 1rem 0;
-    color: #1a1a1a;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin: 0 0 0.5rem 0;
+    color: #1f2937;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   p {
-    margin: 0 0 1rem 0;
-    color: #666;
+    margin: 0;
+    color: #6b7280;
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.4;
   }
+`;
 
-  .toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: #374151;
-  }
+const LockIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 24px;
+  background: #f3f4f6;
+  border-radius: 12px;
+  color: #6b7280;
+  font-size: 0.8rem;
 `;
 
 const ToggleSwitch = styled.label`
   position: relative;
   display: inline-block;
-  width: 50px;
+  width: 44px;
   height: 24px;
 
   input {
@@ -229,7 +258,7 @@ const ToggleSwitch = styled.label`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #e5e7eb;
     transition: 0.3s;
     border-radius: 24px;
 
@@ -243,24 +272,64 @@ const ToggleSwitch = styled.label`
       background-color: white;
       transition: 0.3s;
       border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
   }
 
   input:checked + .slider {
-    background-color: #8b5cf6;
+    background-color: #10b981;
   }
 
   input:checked + .slider:before {
-    transform: translateX(26px);
+    transform: translateX(20px);
+  }
+
+  input:disabled + .slider {
+    background-color: #e5e7eb;
+    cursor: not-allowed;
   }
 `;
 
-const ModalFooter = styled.div`
-  padding: 1rem 2rem 2rem 2rem;
-  border-top: 1px solid #e5e7eb;
+const SettingsModalFooter = styled.div`
+  padding: 1.5rem 2rem 2rem 2rem;
+  border-top: 1px solid #f3f4f6;
   display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: 0.75rem;
+`;
+
+const AcceptAllButton = styled(motion.button)`
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+
+  &:hover {
+    background: #059669;
+  }
+`;
+
+const SaveSettingsButton = styled(motion.button)`
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: white;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+
+  &:hover {
+    background: #f9fafb;
+  }
 `;
 
 const CookieConsent = () => {
@@ -352,75 +421,7 @@ const CookieConsent = () => {
     <>
       <AnimatePresence>
         {showBanner && (
-          <CookieBanner
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <CookieContent>
-              <CookieInfo>
-                <h3>
-                  <FaCookie />
-                  We use cookies
-                </h3>
-                <p>
-                  We use cookies to enhance your browsing experience, serve
-                  personalized content, and analyze our traffic. By clicking
-                  "Accept All", you consent to our use of cookies. You can
-                  manage your preferences by clicking{" "}
-                  <button
-                    onClick={openSettings}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      color: "#8b5cf6",
-                      textDecoration: "underline",
-                      cursor: "pointer",
-                      padding: 0,
-                      font: "inherit",
-                    }}
-                  >
-                    Cookie Settings
-                  </button>
-                  .
-                </p>
-              </CookieInfo>
-              <CookieActions>
-                <CookieButton
-                  className="outline"
-                  onClick={openSettings}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FaCog />
-                  Cookie Settings
-                </CookieButton>
-                <CookieButton
-                  className="secondary"
-                  onClick={acceptEssential}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Essential Only
-                </CookieButton>
-                <CookieButton
-                  className="primary"
-                  onClick={acceptAll}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Accept All
-                </CookieButton>
-              </CookieActions>
-            </CookieContent>
-          </CookieBanner>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showSettings && (
-          <SettingsModal
+          <CookieModal
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -433,112 +434,128 @@ const CookieConsent = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <ModalHeader>
-                <h2>
-                  <FaCookie />
-                  Cookie Settings
-                </h2>
-                <button onClick={closeSettings}>
-                  <FaTimes />
-                </button>
+                <CookieIcon />
+                <h2>We use Cookies</h2>
+                <p>
+                  We use cookies to enhance your browsing experience. By
+                  continuing, you agree to our Cookie Policy.
+                </p>
               </ModalHeader>
 
-              <ModalBody>
-                <CookieCategory>
-                  <h3>
-                    Essential Cookies
-                    <ToggleSwitch>
-                      <input type="checkbox" checked={true} disabled />
-                      <span className="slider"></span>
-                    </ToggleSwitch>
-                  </h3>
-                  <p>
-                    These cookies are necessary for the website to function and
-                    cannot be switched off. They are usually only set in
-                    response to actions made by you which amount to a request
-                    for services, such as setting your privacy preferences,
-                    logging in or filling in forms.
-                  </p>
-                </CookieCategory>
-
-                <CookieCategory>
-                  <h3>
-                    Analytics Cookies
-                    <ToggleSwitch>
-                      <input
-                        type="checkbox"
-                        checked={cookiePreferences.analytics}
-                        onChange={() => handlePreferenceChange("analytics")}
-                      />
-                      <span className="slider"></span>
-                    </ToggleSwitch>
-                  </h3>
-                  <p>
-                    These cookies allow us to count visits and traffic sources
-                    so we can measure and improve the performance of our site.
-                    They help us to know which pages are the most and least
-                    popular and see how visitors move around the site.
-                  </p>
-                </CookieCategory>
-
-                <CookieCategory>
-                  <h3>
-                    Marketing Cookies
-                    <ToggleSwitch>
-                      <input
-                        type="checkbox"
-                        checked={cookiePreferences.marketing}
-                        onChange={() => handlePreferenceChange("marketing")}
-                      />
-                      <span className="slider"></span>
-                    </ToggleSwitch>
-                  </h3>
-                  <p>
-                    These cookies may be set through our site by our advertising
-                    partners to build a profile of your interests and show you
-                    relevant adverts on other sites.
-                  </p>
-                </CookieCategory>
-
-                <CookieCategory>
-                  <h3>
-                    Functional Cookies
-                    <ToggleSwitch>
-                      <input
-                        type="checkbox"
-                        checked={cookiePreferences.functional}
-                        onChange={() => handlePreferenceChange("functional")}
-                      />
-                      <span className="slider"></span>
-                    </ToggleSwitch>
-                  </h3>
-                  <p>
-                    These cookies enable the website to provide enhanced
-                    functionality and personalisation. They may be set by us or
-                    by third party providers whose services we have added to our
-                    pages.
-                  </p>
-                </CookieCategory>
-              </ModalBody>
-
-              <ModalFooter>
-                <CookieButton
-                  className="secondary"
-                  onClick={closeSettings}
+              <CookieActions>
+                <AcceptButton
+                  onClick={acceptAll}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Cancel
-                </CookieButton>
-                <CookieButton
-                  className="primary"
+                  Accept cookies
+                </AcceptButton>
+                <DeclineButton
+                  onClick={acceptEssential}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Decline cookies
+                </DeclineButton>
+                <div style={{ textAlign: "center", marginTop: "0.5rem" }}>
+                  <SettingsLink onClick={openSettings}>
+                    Cookie Settings
+                  </SettingsLink>
+                </div>
+              </CookieActions>
+            </ModalContent>
+          </CookieModal>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showSettings && (
+          <SettingsModal
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeSettings}
+          >
+            <SettingsModalContent
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <SettingsModalHeader>
+                <h2>Cookie settings</h2>
+                <p>
+                  We use cookies, some of them are essential, others are
+                  optional. <span className="learn-more">Learn more</span>
+                </p>
+              </SettingsModalHeader>
+
+              <SettingsModalBody>
+                <CookieCategory>
+                  <div className="category-info">
+                    <h3>Strictly Necessary</h3>
+                    <p>
+                      These cookies are necessary for the website and can't be
+                      deactivated.
+                    </p>
+                  </div>
+                  <LockIndicator>🔒</LockIndicator>
+                </CookieCategory>
+
+                <CookieCategory>
+                  <div className="category-info">
+                    <h3>Marketing & Analytics</h3>
+                    <p>
+                      These cookies can be set by our advertising partners
+                      through our website.
+                    </p>
+                  </div>
+                  <ToggleSwitch>
+                    <input
+                      type="checkbox"
+                      checked={cookiePreferences.marketing}
+                      onChange={() => handlePreferenceChange("marketing")}
+                    />
+                    <span className="slider"></span>
+                  </ToggleSwitch>
+                </CookieCategory>
+
+                <CookieCategory>
+                  <div className="category-info">
+                    <h3>Preferences</h3>
+                    <p>
+                      To individualize your content, we use tools that
+                      personalize your web experience.
+                    </p>
+                  </div>
+                  <ToggleSwitch>
+                    <input
+                      type="checkbox"
+                      checked={cookiePreferences.functional}
+                      onChange={() => handlePreferenceChange("functional")}
+                    />
+                    <span className="slider"></span>
+                  </ToggleSwitch>
+                </CookieCategory>
+              </SettingsModalBody>
+
+              <SettingsModalFooter>
+                <AcceptAllButton
+                  onClick={acceptAll}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Accept all cookies
+                </AcceptAllButton>
+                <SaveSettingsButton
                   onClick={saveCustomPreferences}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Save Preferences
-                </CookieButton>
-              </ModalFooter>
-            </ModalContent>
+                  Save settings
+                </SaveSettingsButton>
+              </SettingsModalFooter>
+            </SettingsModalContent>
           </SettingsModal>
         )}
       </AnimatePresence>

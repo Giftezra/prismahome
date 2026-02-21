@@ -12,6 +12,9 @@ import {
   FaChevronDown,
   FaPlay,
   FaHeart,
+  FaHandshake,
+  FaFileAlt,
+  FaCogs,
 } from "react-icons/fa";
 import "./App.css";
 
@@ -89,11 +92,49 @@ const HeroSubtitle = styled.p`
   font-size: 1.2rem;
   color: #666;
   font-style: italic;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+`;
+
+const HeroTagline = styled.p`
+  font-size: 1rem;
+  color: #555;
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  line-height: 1.5;
+`;
+
+const ValueStrip = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+`;
+
+const ValueItem = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.8);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+
+  svg {
+    flex-shrink: 0;
+    color: #2196f3;
+  }
+  @media (max-width: 768px) {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+  }
 `;
 
 const HeroImage = styled.div`
@@ -601,6 +642,121 @@ const TransformImage = styled.div`
   }
 `;
 
+// Fleet & Partnership Section
+const FleetSection = styled.section`
+  padding: 5rem 0;
+  background: linear-gradient(180deg, #ffffff 0%, #e3f2fd 50%, #ffffff 100%);
+  color: #1a1a1a;
+`;
+
+const FleetContent = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+`;
+
+const FleetTitle = styled.h2`
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const FleetSubtitle = styled.p`
+  font-size: 1.15rem;
+  color: #555;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+`;
+
+const FleetGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+`;
+
+const FleetCard = styled(motion.div)`
+  background: white;
+  border-radius: 12px;
+  padding: 1.75rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+`;
+
+const FleetCardIcon = styled.div`
+  font-size: 2.25rem;
+  color: #2196f3;
+  margin-bottom: 1rem;
+`;
+
+const FleetCardTitle = styled.h3`
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+`;
+
+const FleetCardText = styled.p`
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+`;
+
+// Premium & Documentation Section
+const PremiumDocsSection = styled.section`
+  padding: 4rem 0;
+  background: #1a1a1a;
+  color: white;
+`;
+
+const PremiumDocsContent = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+`;
+
+const PremiumDocsTitle = styled.h2`
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+`;
+
+const PremiumDocsText = styled.p`
+  font-size: 1.1rem;
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+`;
+
+const PremiumDocsCTA = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #2196f3;
+  color: white;
+  padding: 0.9rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #1976d2;
+  }
+`;
+
 // Licensed Section
 const LicensedSection = styled.section`
   padding: 4rem 0;
@@ -1048,6 +1204,23 @@ function App() {
                 Get Your Services Delivered To You Anywhere At Your Convenience
                 <FaHeart style={{ color: "#ff6b35", marginLeft: "0.5rem" }} />
               </HeroSubtitle>
+              <HeroTagline>
+                Premium mobile detailing with flexible scheduling, fleet & partnership programs, and clear documentation—so you can book in seconds and keep every vehicle at its best.
+              </HeroTagline>
+              <ValueStrip>
+                <ValueItem initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                  <FaHandshake /> Fleet & Partnership
+                </ValueItem>
+                <ValueItem initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                  <FaMobile /> Ease of Use
+                </ValueItem>
+                <ValueItem initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+                  <FaCogs /> Flexibility
+                </ValueItem>
+                <ValueItem initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+                  <FaFileAlt /> Premium & Docs
+                </ValueItem>
+              </ValueStrip>
             </motion.div>
 
             <HeroImage>
@@ -1098,11 +1271,9 @@ function App() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <ProblemsTitle>Industry Challenges</ProblemsTitle>
+              <ProblemsTitle>Built for Scale & Simplicity</ProblemsTitle>
               <ProblemsSubtitle>
-                Traditional automotive care services face significant
-                operational limitations that impact customer experience and
-                service quality.
+                From individual drivers to fleets and partners—we deliver ease of use, flexibility, and premium service with clear documentation at every step.
               </ProblemsSubtitle>
             </motion.div>
 
@@ -1170,18 +1341,81 @@ function App() {
                 <ProblemIcon>
                   <FaMobile />
                 </ProblemIcon>
-                <ProblemTitle>Technology Integration</ProblemTitle>
+                <ProblemTitle>Technology & Ease of Use</ProblemTitle>
                 <ProblemDescription>
-                  Legacy booking systems and manual processes create operational
-                  inefficiencies and customer friction. Our integrated digital
-                  platform provides seamless booking, real-time service
-                  tracking, and transparent pricing management.
+                  Our integrated platform makes booking and managing services simple: seamless app booking, real-time tracking, and transparent pricing—so you spend less time organising and more time on the road.
+                </ProblemDescription>
+              </ProblemCard>
+
+              <ProblemCard
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <ProblemIcon>
+                  <FaHandshake />
+                </ProblemIcon>
+                <ProblemTitle>Fleet & Partnership</ProblemTitle>
+                <ProblemDescription>
+                  One platform for fleet owners, branches, and partners. Manage multiple vehicles, branches, and subscriptions with fleet maintenance insights, partner programs, and dedicated support—all in one place.
                 </ProblemDescription>
               </ProblemCard>
             </ProblemsGrid>
           </ProblemsContent>
         </Container>
       </ProblemsSection>
+
+      {/* Fleet & Partnership Section */}
+      <FleetSection>
+        <Container>
+          <FleetContent>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <FleetTitle>Fleet & Partnership Programs</FleetTitle>
+              <FleetSubtitle>
+                Whether you run a corporate fleet, multiple branches, or partner with us—get one platform that scales. Flexible subscriptions, fleet maintenance reporting, and clear documentation so your team and partners stay aligned.
+              </FleetSubtitle>
+              <FleetGrid>
+                <FleetCard
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <FleetCardIcon><FaCar /></FleetCardIcon>
+                  <FleetCardTitle>Fleet Management</FleetCardTitle>
+                  <FleetCardText>Manage vehicles across branches, track subscriptions, and keep fleet maintenance data in one place.</FleetCardText>
+                </FleetCard>
+                <FleetCard
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <FleetCardIcon><FaHandshake /></FleetCardIcon>
+                  <FleetCardTitle>Partnerships</FleetCardTitle>
+                  <FleetCardText>Partner programs and referral benefits with straightforward terms and support when you need it.</FleetCardText>
+                </FleetCard>
+                <FleetCard
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
+                  <FleetCardIcon><FaCogs /></FleetCardIcon>
+                  <FleetCardTitle>Flexibility</FleetCardTitle>
+                  <FleetCardText>At-home or at-shop, multiple packages, and scheduling that works around your operations.</FleetCardText>
+                </FleetCard>
+              </FleetGrid>
+            </motion.div>
+          </FleetContent>
+        </Container>
+      </FleetSection>
 
       {/* Service Packages Section */}
       <PackagesSection>
@@ -1315,7 +1549,7 @@ function App() {
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                Mobile Auto Detailing
+                Ease of Use, Where You Need It
               </motion.h3>
               <motion.p
                 initial={{ opacity: 0, x: -50 }}
@@ -1323,7 +1557,7 @@ function App() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                Offering you convenience and flexibility
+                Book in seconds from the app, choose your location and time, and get premium mobile detailing with full flexibility—at home, office, or our shop.
               </motion.p>
             </MobileContent>
             <MobileImage>
@@ -1397,13 +1631,9 @@ function App() {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <LicensedTitle>Licensed And Insured</LicensedTitle>
+              <LicensedTitle>Licensed, Insured & Ready to Scale</LicensedTitle>
               <LicensedText>
-                With over 3 years in the business, PrismaValet has fine-tuned
-                the most Convenient and Trusted detailing experience. We take
-                care of every detail, so you don't have to. Whether at your
-                place or our shop, we're ready to make your car, boat, or RV
-                look brand new. Get in touch & book your appointment today!
+                With years in the business, PrismaValet delivers a trusted, flexible detailing experience—for individuals, fleets, and partners. We take care of every detail with premium service and clear documentation. At your place or our shop, we're ready to make your car, boat, or RV look brand new. Get in touch or download the app to book today.
               </LicensedText>
             </motion.div>
           </LicensedContent>
@@ -1471,9 +1701,9 @@ function App() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <MobileTitle>Mobile Auto Detailing</MobileTitle>
+              <MobileTitle>Simple Booking, Maximum Flexibility</MobileTitle>
               <MobileSubtitle>
-                We bring you convenience and flexibility
+                Download the app to book anytime, reschedule when needed, and get the same premium service whether you're one car or a full fleet.
               </MobileSubtitle>
             </motion.div>
 
@@ -1536,7 +1766,7 @@ function App() {
               style={{ marginBottom: "2rem" }}
             >
               See what makes PrismaValet the top choice for everything car
-              detailing. At Home or At Shop service available.
+              detailing—premium service, flexibility, and clear processes. At Home or At Shop.
             </motion.p>
             <PlayButton
               initial={{ opacity: 0, y: 30 }}
@@ -1552,6 +1782,28 @@ function App() {
           </VideoContent>
         </Container>
       </VideoSection>
+
+      {/* Premium Services & Documentation Section */}
+      <PremiumDocsSection>
+        <Container>
+          <PremiumDocsContent>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <PremiumDocsTitle>Premium Services & Documentation</PremiumDocsTitle>
+              <PremiumDocsText>
+                From Quick Sparkle to Ultimate Prestige, every package is delivered to a high standard with clear service definitions. Fleet and partner programs come with documentation and support so you know exactly what you're getting—and how to get the most out of the platform.
+              </PremiumDocsText>
+              <PremiumDocsCTA href="mailto:support@prismavalet.com?subject=Partnership%20or%20Documentation%20request">
+                <FaFileAlt /> Contact for partnerships & docs
+              </PremiumDocsCTA>
+            </motion.div>
+          </PremiumDocsContent>
+        </Container>
+      </PremiumDocsSection>
 
       {/* FAQ Section */}
       <FAQSection>
@@ -1595,7 +1847,7 @@ function App() {
             }}
           >
             <p style={{ margin: 0 }}>
-              &copy; 2025 PrismaValet. All rights reserved.
+              &copy; 2026 prismavalet, all rights reserved. Powered by @vhotis technology
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <a
@@ -1609,6 +1861,12 @@ function App() {
                 style={{ color: "#8b5cf6", textDecoration: "underline" }}
               >
                 Cookie Demo
+              </a>
+              <a
+                href="mailto:support@prismavalet.com?subject=Documentation%20or%20Partnership"
+                style={{ color: "#8b5cf6", textDecoration: "underline" }}
+              >
+                Documentation & Partnerships
               </a>
             </div>
           </div>
